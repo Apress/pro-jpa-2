@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project name="example" default="deploy">
+ 
+    <property file="../../../config/common.properties"/>
+    <import file="../../../config/common.xml" />
+
+    <target name="deploy" depends="init,build_war,deploy_war" />
+    <target name="undeploy" depends="init,undeploy_war,clean" />
+    <target name="run" depends="deploy,build_client,run_client" />
+
+    <target name="init">
+        <property name="example_name" value="slsbRemoteExample" />
+    </target>
+
+    <target name="build_client" depends="setup">
+        <javac srcdir="src/client" destdir="build/client" debug="on">
+            <classpath>
+               <pathelement path="${J2EE_CLASSPATH}" />
+               <pathelement location="dist/lib/${example_name}.jar" />
+            </classpath>
+        </javac>
+        <jar jarfile="dist/${example_name}_client.jar" 
+             manifest="etc/client/Manifest.mf"
+             update="yes">
+            <fileset dir="build/client"/>
+            <fileset dir="build/model"/>
+            <fileset dir="etc/client"/>
+        </jar>
+    </target>
+    
+    <target name="run_client">
+        <exec executable="${SERVER_HOME}/bin/appclient" failonerror="true" vmlauncher="false">
+            <arg line="-client dist/${example_name}_client.jar" />
+        </exec>
+    </target>
+</project>

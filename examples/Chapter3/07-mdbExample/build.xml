@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project name="example" default="deploy">
+ 
+    <property file="../../../config/common.properties"/>
+    <import file="../../../config/common.xml" />
+
+    <target name="deploy" depends="init,build_war,create_mdb_queue,deploy_war" />
+    <target name="undeploy" depends="init,undeploy_war,delete_mdb_queue,clean" />
+
+    <target name="init">
+        <property name="example_name" value="mdbExample" />
+    </target>
+
+    <target name="create_mdb_queue">
+        <exec executable="${SERVER_HOME}/bin/asadmin" failonerror="true" vmlauncher="false">
+            <arg line="create-jms-resource --user ${ADMIN_USER} ${PASSWORD_PREFIX} ${PASSWORD_FILE} --restype javax.jms.Queue --property imqDestinationName=destinationQueue destinationQueue"/>
+        </exec>
+        <exec executable="${SERVER_HOME}/bin/asadmin" failonerror="true" vmlauncher="false">
+            <arg line="create-jms-resource --user ${ADMIN_USER} ${PASSWORD_PREFIX} ${PASSWORD_FILE} --restype javax.jms.QueueConnectionFactory factory"/>
+        </exec>
+    </target>
+
+    <target name="delete_mdb_queue">
+        <exec executable="${SERVER_HOME}/bin/asadmin" failonerror="true" vmlauncher="false">
+            <arg line="delete-jms-resource --user ${ADMIN_USER} ${PASSWORD_PREFIX} ${PASSWORD_FILE} factory"/>
+        </exec>
+        <exec executable="${SERVER_HOME}/bin/asadmin" failonerror="true" vmlauncher="false">
+            <arg line="delete-jms-resource --user ${ADMIN_USER} ${PASSWORD_PREFIX} ${PASSWORD_FILE} destinationQueue"/>
+        </exec>
+    </target>
+</project>

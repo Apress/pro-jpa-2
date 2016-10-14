@@ -1,0 +1,31 @@
+<web-app version="2.5"
+         xmlns="http://java.sun. com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+    <servlet>
+        <servlet-name>EmployeeServiceServlet</servlet-name>
+        <servlet-class>examples.servlet.EmployeeServiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeEditServlet</servlet-name>
+        <servlet-class>examples.servlet.EmployeeEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmployeeUpdateServlet</servlet-name>
+        <servlet-class>examples.servlet.EmployeeUpdateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmployeeServiceServlet</servlet-name>
+        <url-pattern>/EmployeeServiceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeEditServlet</servlet-name>
+        <url-pattern>/EmployeeEditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmployeeUpdateServlet</servlet-name>
+        <url-pattern>/EmployeeUpdateServlet</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,21 @@
+<web-app version="2.5"
+         xmlns="http://java.sun. com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+    <servlet>
+        <servlet-name>OrderBrowserServlet</servlet-name>
+        <servlet-class>examples.servlet.OrderBrowserServlet</servlet-class>
+    </servlet>
+	
+    <servlet-mapping>
+        <servlet-name>OrderBrowserServlet</servlet-name>
+        <url-pattern>/OrderBrowserServlet</url-pattern>
+    </servlet-mapping>
+	
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/OrderBrowser</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>examples.stateful.OrderBrowser</local>
+    </ejb-local-ref>	
+</web-app>

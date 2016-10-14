@@ -1,0 +1,50 @@
+
+These examples assume that you have installed Java SE 6 and Apache ant.
+
+Java SE 6 is available for download at http://java.sun.com/javase/downloads/index.jsp.
+Apache ant is available for download at http://ant.apache.org.
+
+1. Assume the examples have been downloaded and unzipped to <EXAMPLES_HOME>.
+
+2. Edit <EXAMPLES_HOME>/config/setenv.bat to point to your JDK 1.6 ant 1.7.1 installation 
+   directories if JAVA_HOME and ANT_HOME have not been set in your environment.
+
+3. Download and install Glassfish V3 from http://glassfish.dev.java.net.
+   We recommend installing the Glassfish V3 Web Profile (only a couple of demos, 3-3 and 3-7 will not run).
+
+4. Edit <EXAMPLES_HOME>/config/common.properties and set:
+
+       EXAMPLES_HOME - the folder in which the examples were unzipped 
+       SERVER_HOME - the folder in which Glassfish was installed
+  
+   NOTE: Make sure you use a forward slash separator ('/') not a backward slash ('\')
+
+5. Start Glassfish and the Derby database by invoking the startservers.bat script
+   in <EXAMPLES_HOME>/bin.
+
+6. Open <EXAMPLES_HOME>/examples/examplesHome.html to get started.
+
+   For each server-based example:
+
+        1. Run deploy.bat before running the example
+        2. Run undeploy.bat when finished with the example
+
+   The client-based examples have a run.bat script. They assume the database is 
+   already runnning, as in sep 5.
+
+Notes:
+
+A. The first time you start the Glassfish server it will appear to hang at the 
+   Felix intro. It should be faster every time after that.
+
+B. Derby seems to take a long time dropping non-existent tables, so the first time 
+   deploying each of the tests it will take a little longer to execute the run_sql target.
+   You will also see the DROP TABLE commands fail. It's expected.
+   
+C. Example 12 in Ch 4 will not run on Derby because Derby does not support sequences.
+
+D. A few of the tests in Ch 5 do not run correctly due to obscure Map support bugs in EclipseLink.
+   Installing a later version of EclipseLink into Glassfish might be necessary to get past these.
+
+E. If you plan on taking the demos and changing them for fun, and you get an exception that
+   an entity class is an "unknown entity type", you may need to bounce (stop and restart) the server.

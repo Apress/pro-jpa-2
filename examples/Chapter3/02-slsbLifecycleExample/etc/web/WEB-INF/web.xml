@@ -1,0 +1,21 @@
+<web-app version="2.5"
+         xmlns="http://java.sun. com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+    <servlet>
+        <servlet-name>LoggerServlet</servlet-name>
+        <servlet-class>examples.servlet.LoggerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoggerServlet</servlet-name>
+        <url-pattern>/LoggerServlet</url-pattern>
+    </servlet-mapping>
+
+    <ejb-ref>
+        <ejb-ref-name>ejb/Logger</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>examples.stateless.Logger</remote>
+    </ejb-ref>	
+</web-app>

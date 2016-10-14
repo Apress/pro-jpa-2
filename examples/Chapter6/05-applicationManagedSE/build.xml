@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project name="example" default="run">
+ 
+    <property file="../../../config/common.properties"/>
+    <import file="../../../config/common.xml" />
+
+    <target name="run" depends="init,build,run_sql,run_client,clean" />
+
+    <target name="init">
+        <property name="example_name" value="applicationManagedSE" />
+        <property name="DB_NAME" value="applicationManagedSE" />
+    </target>
+
+    <target name="build" depends="setup,build_jar">
+         <javac srcdir="src/client" destdir="build/client" debug="on">
+            <classpath>
+               <pathelement path="${JPA_CLASSPATH}" />
+               <pathelement location="dist/lib/${example_name}.jar" />
+            </classpath>
+        </javac>
+        <jar jarfile="dist/${example_name}_client.jar" update="yes">
+            <fileset dir="build/client"/>
+        </jar>
+    </target>
+    
+    <target name="run_client">
+	<java classname="examples.client.EmployeeClient" fork="true">
+            <sysproperty key="derby.system.home" value="${DERBY_SYSTEM_HOME}"/>
+            <classpath>
+                <pathelement path="${CLIENT_CLASSPATH}"/>
+                <pathelement location="dist/${example_name}_client.jar" />
+                <pathelement location="dist/lib/${example_name}.jar" />
+            </classpath>
+        </java>
+    </target>
+</project>
